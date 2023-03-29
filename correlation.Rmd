@@ -1,0 +1,46 @@
+---
+title: "Correlations"
+output: pdf_document
+date: "2023-03-09"
+---
+
+## R Markdown
+
+```{r}
+library(psych)
+library(tidyverse)
+
+```
+
+
+
+```{r}
+movie_correlation2 = subset(movie_correlation, NG == 0)
+movie_correlation2 = subset(movie_correlation2, select = -c(NG) )
+mat <- polychoric(movie_correlation2)$rho
+
+```
+
+
+```{r}
+
+library(ggcorrplot)
+
+#### Plot It ####
+ggcorrplot(mat,
+           type = "lower",
+           method = "circle",
+           hc.order = TRUE,
+           show.diag = F)
+```
+
+
+
+```{r}
+
+corrplot(mat,method="square",order='FPC',type="lower",diag=FALSE)
+
+```
+
+
+
